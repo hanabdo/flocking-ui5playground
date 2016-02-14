@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<core:View
+    controllerName="fplay.controller.Main"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:zlib="zlib"
+>
+  <Page
+      title="Flocking Interactive Playground"
+  >
+    <content>
+      <ToggleButton
+          icon="sap-icon://hello-world"
+          press="handleSayHelloWorld"
+      />
+      <ToggleButton
+          icon="sap-icon://play"
+          press="handleStopPlay"
+      />
+      <zlib:Codemirror
+          id="jseditor"
+          theme="solarized"
+          mode="javascript"
+          value="{
+            path: 'examples>code',
+            formatter: '.formatLoadedExample'
+          }"
+      />
+    </content>
+  </Page>
+</core:View>

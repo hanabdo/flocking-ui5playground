@@ -1,0 +1,31 @@
+{
+  "name": "flocking-ui5playground",
+  "description": "openui5 wrapper for Flocking playground",
+  "main": "index.html",
+  "authors": [
+    "Aleksey Krasnobaev"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "openui5-sap.m": "openui5/packaged-sap.m#~1.36.0",
+    "codemirror": "CodeMirror#~5.11.0",
+    "openui5-themelib_sap_bluecrystal": "openui5/packaged-themelib_sap_bluecrystal#~1.36.0",
+    "flocking": "~0.1.5"
+  },
+  "resolutions": {
+    "openui5-sap.m": "~1.36.0",
+    "openui5-sap.ui.core": "1.36.0"
+  }
+}

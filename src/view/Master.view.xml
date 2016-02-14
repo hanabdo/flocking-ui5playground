@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<core:View
+    controllerName="fplay.controller.Master"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:zlib="zlib"
+>
+  <Page
+      title="Examples"
+  >
+    <subHeader>
+      <Toolbar
+          design="Solid"
+      >
+        <SearchField
+            liveChange="onExampleSearch"
+            width="100%"
+        />
+      </Toolbar>
+    </subHeader>
+
+    <List
+        id="idExamplesList"
+        mode="SingleSelectMaster"
+        noDataText="Examples not loaded"
+        selectionChange="loadExample"
+        items="{
+          path: 'examples>/',
+          sorter: {
+            path: 'group',
+            descending: false,
+            group: true
+          },
+          groupHeaderFactory: '.getGroupHeader'
+        }"
+    >
+      <StandardListItem
+          title="{examples>name}"
+          description="{examples>desc}"
+      />
+    </List>
+  </Page>
+</core:View>

@@ -1,0 +1,36 @@
+.zCodemirror {
+  display: flex;
+  border: 1px solid #cdcdcd !important;
+}
+
+/* Codemirror */
+.CodeMirror {
+    height: auto !important;
+}
+.CodeMirror.CodeMirror-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+.CodeMirror-scroll {
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+.CodeMirror span {
+    word-break: break-all;
+}
+
+/* match highlight */
+.cm-matchhighlight {
+    background-color: lightgreen;
+}
+/** @todo TBI, stub for highlight matches on scrollbar */
+.CodeMirror-selection-highlight-scrollbar {
+    background-color: green
+}
+
+/* solarized theme fix */
+.CodeMirror.cm-s-solarized.CodeMirror-wrap {
+    box-shadow: inherit !important;
+}
