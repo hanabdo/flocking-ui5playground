@@ -8,7 +8,10 @@
  */
 sap.ui.define([
   'sap/ui/core/UIComponent',
-], function (UIComponent) {
+  'fplay/lib/Router',
+  'fplay/model/Examples',
+  'sap/m/routing/RouteMatchedHandler',
+], function (UIComponent, Router, ExamplesModel, RouteMatchedHandler) {
   'use strict';
 
   var Component = UIComponent.extend('fplay.Component', {
@@ -20,6 +23,49 @@ sap.ui.define([
         libs: ['sap.m', 'zlib'],
       },
       rootView: 'fplay.view.App',
+      routing: {
+        config: {
+          routerClass: 'fplay.lib.Router',
+          viewType: 'XML',
+          viewPath: 'fplay.view',
+          controlId: '__xmlview0--app',
+          controlAggregation: 'detailPages',
+        },
+
+        routes: [{
+          pattern: '',
+          name: 'main',
+          target: ['main', 'master'],
+        }],
+
+        targets: {
+          master: {
+            controlAggregation: 'masterPages',
+            viewName: 'Master',
+            viewId: 'Master',
+          },
+          main: {
+            viewName: 'Main',
+            viewId: 'Main',
+          },
+        },
+      },
+    },
+
+    _oRouter: null,
+    _oRouteHandler: null,
+
+    /**
+     *
+     */
+    init: function () {
+      UIComponent.prototype.init.apply(this, arguments);
+
+      this._oRouter = this.getRouter();
+      this._oRouteHandler = new RouteMatchedHandler(this._oRouter);
+      this._oRouter.initialize();
+
+      this.setModel(new ExamplesModel(), 'examples');
     },
 
   });

@@ -8,6 +8,8 @@
 >
   <Page
       title="Flocking Interactive Playground"
+      showNavButton="true"
+      navButtonPress="onNavBack"
   >
     <content>
       <ToggleButton

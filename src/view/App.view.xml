@@ -7,7 +7,9 @@
     xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
 >
-  <SplitApp>
+  <SplitApp
+      id="app"
+  >
     <masterPages>
       <mvc:XMLView
           viewName="fplay.view.Master"

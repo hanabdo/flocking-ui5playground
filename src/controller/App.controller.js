@@ -11,19 +11,17 @@
  */
 sap.ui.define([
   'sap/ui/core/mvc/Controller',
-  'fplay/model/Examples',
 ], function (Controller, ExamplesModel) {
   'use strict';
 
   return Controller.extend('fplay.controller.App', {
 
     /**
-     * @param {sap.ui.base.Event} oControlEvent
-     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
-     * @param {object} oControlEvent.getParameters
+     * [handleEventDesireMaster description]
+     * @return {[type]} [description]
      */
-    onInit: function (oControlEvent) {
-      this.getView().setModel(new ExamplesModel(), 'examples');
+    handleEventDesireMaster: function () {
+      this.byId('app').showMaster();
     },
 
   });

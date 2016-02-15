@@ -24,7 +24,37 @@ sap.ui.define([
 
   return Controller.extend('fplay.controller.Main', {
 
+    _oComponent: null,
+
     /* events */
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onInit: function (oControlEvent) {
+      hisynth.pause();
+
+      this._oComponent = sap.ui.core.Component.getOwnerComponentFor(
+          this.getView()
+      );
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onNavBack: function (oControlEvent) {
+      if (sap.ui.Device.system.phone) {
+        this._oComponent._oRouter.navToMaster();
+      } else {
+        sap.ui.getCore().byId(
+            this._oComponent.getRouter()._oConfig.controlId
+        ).showMaster();
+      }
+    },
 
     /**
      * play predefined simple synth
