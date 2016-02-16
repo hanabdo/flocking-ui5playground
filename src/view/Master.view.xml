@@ -2,6 +2,7 @@
 <core:View
     controllerName="fplay.controller.Master"
     displayBlock="true"
+    class="sapUiSizeCompact MasterView"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:zlib="zlib"
@@ -11,6 +12,7 @@
   >
     <subHeader>
       <Toolbar
+          class="DetailView__Toolbar"
           design="Solid"
       >
         <SearchField

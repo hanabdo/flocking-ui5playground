@@ -1,6 +1,7 @@
 .zCodemirror {
   display: flex;
-  border: 1px solid #cdcdcd !important;
+  /*border: 1px solid #cdcdcd !important;*/
+  border-right: 1px solid #cdcdcd !important;
 }
 
 /* Codemirror */
@@ -14,7 +15,7 @@
 }
 .CodeMirror-scroll {
     flex-grow: 1;
-    flex-shrink: 0;
+    /*flex-shrink: 0; break things*/
 }
 .CodeMirror span {
     word-break: break-all;

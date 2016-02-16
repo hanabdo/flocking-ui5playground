@@ -5,10 +5,7 @@
     "type": "application",
     "title": "Flocking playground with OpenUI5 interface and CodeMirror",
     "description": "Flocking playground with OpenUI5 interface and CodeMirror",
-    "name": "flocking-ui5playground",
-    "includes": [
-      "css/style.css"
-    ]
+    "name": "flocking-ui5playground"
   },
   "sap.ui": {
     "technology": "UI5",
@@ -30,13 +27,18 @@
         "zlib": {}
       }
     },
-
     "models": {
       "examples": {
         "type": "fplay.model.Examples"
       }
     },
-
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
     "routing": {
       "config": {
         "routerClass": "fplay.lib.Router",
