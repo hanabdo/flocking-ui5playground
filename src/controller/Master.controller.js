@@ -26,17 +26,6 @@ sap.ui.define([
      * @param {sap.ui.base.EventProvider} oControlEvent.getSource
      * @param {object} oControlEvent.getParameters
      */
-    onInit: function (oControlEvent) {
-      this._oComponent = sap.ui.core.Component.getOwnerComponentFor(
-          this.getView()
-      );
-    },
-
-    /**
-     * @param {sap.ui.base.Event} oControlEvent
-     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
-     * @param {object} oControlEvent.getParameters
-     */
     loadExample: function (oControlEvent) {
       var oContext = oControlEvent.getParameter('listItem')
                                   .getBindingContext('examples');
@@ -48,7 +37,7 @@ sap.ui.define([
             oBinding.setContext(oContext);
           });
 
-      this._oComponent._oRouter.navToMain();
+      this.getOwnerComponent().getRouter().navToMain();
     },
 
     /**

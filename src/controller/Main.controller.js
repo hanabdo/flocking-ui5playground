@@ -24,8 +24,6 @@ sap.ui.define([
 
   return Controller.extend('fplay.controller.Main', {
 
-    _oComponent: null,
-
     /* events */
 
     /**
@@ -35,10 +33,6 @@ sap.ui.define([
      */
     onInit: function (oControlEvent) {
       hisynth.pause();
-
-      this._oComponent = sap.ui.core.Component.getOwnerComponentFor(
-          this.getView()
-      );
     },
 
     /**
@@ -48,11 +42,9 @@ sap.ui.define([
      */
     onNavBack: function (oControlEvent) {
       if (sap.ui.Device.system.phone) {
-        this._oComponent._oRouter.navToMaster();
+        this.getOwnerComponent().getRouter().navToMaster();
       } else {
-        sap.ui.getCore().byId(
-            this._oComponent.getRouter()._oConfig.controlId
-        ).showMaster();
+        this.getOwnerComponent().getApp().showMaster();
       }
     },
 

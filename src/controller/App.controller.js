@@ -17,6 +17,15 @@ sap.ui.define([
   return Controller.extend('fplay.controller.App', {
 
     /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onInit: function (oControlEvent) {
+      this.getOwnerComponent().setApp(this.byId('app'));
+    },
+
+    /**
      * [handleEventDesireMaster description]
      * @return {[type]} [description]
      */

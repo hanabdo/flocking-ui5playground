@@ -9,51 +9,19 @@
 sap.ui.define([
   'sap/ui/core/UIComponent',
   'fplay/lib/Router',
-  'fplay/model/Examples',
-  'sap/m/routing/RouteMatchedHandler',
-], function (UIComponent, Router, ExamplesModel, RouteMatchedHandler) {
+], function (UIComponent) {
   'use strict';
 
   var Component = UIComponent.extend('fplay.Component', {
     metadata: {
-      name: 'flocking-ui5playground',
-      version: '0.0.1',
-      includes: ['css/style.css'],
-      dependencies: {
-        libs: ['sap.m', 'zlib'],
-      },
-      rootView: 'fplay.view.App',
-      routing: {
-        config: {
-          routerClass: 'fplay.lib.Router',
-          viewType: 'XML',
-          viewPath: 'fplay.view',
-          controlId: '__xmlview0--app',
-          controlAggregation: 'detailPages',
-        },
-
-        routes: [{
-          pattern: '',
-          name: 'main',
-          target: ['main', 'master'],
-        }],
-
-        targets: {
-          master: {
-            controlAggregation: 'masterPages',
-            viewName: 'Master',
-            viewId: 'Master',
-          },
-          main: {
-            viewName: 'Main',
-            viewId: 'Main',
-          },
+      manifest: 'json',
+      properties: {
+        app: {
+          type: 'sap.m.App',
+          bindable: false,
         },
       },
     },
-
-    _oRouter: null,
-    _oRouteHandler: null,
 
     /**
      *
@@ -61,11 +29,23 @@ sap.ui.define([
     init: function () {
       UIComponent.prototype.init.apply(this, arguments);
 
-      this._oRouter = this.getRouter();
-      this._oRouteHandler = new RouteMatchedHandler(this._oRouter);
-      this._oRouter.initialize();
+      this.getRouter().initialize();
+    },
 
-      this.setModel(new ExamplesModel(), 'examples');
+    /* mutators */
+
+    /**
+     * assuming that routing parent target control clued to sap.m.App
+     * @return {sap.m.App}
+     */
+    getApp: function () {
+      if (!this.getProperty('app')) { // prepare cache
+        var sAppViewId = this.getRouter()._oConfig.targetParent;
+        var sAppId = this.getRouter()._oConfig.controlId;
+        this.setProperty('app', sap.ui.getCore().byId(sAppViewId).byId(sAppId));
+      }
+
+      return this.getProperty('app'); // return cache
     },
 
   });

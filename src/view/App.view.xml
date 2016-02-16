@@ -9,17 +9,5 @@
 >
   <SplitApp
       id="app"
-  >
-    <masterPages>
-      <mvc:XMLView
-          viewName="fplay.view.Master"
-      />
-    </masterPages>
-
-    <detailPages>
-      <mvc:XMLView
-          viewName="fplay.view.Main"
-      />
-    </detailPages>
-  </SplitApp>
+  />
 </core:View>

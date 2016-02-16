@@ -1,0 +1,71 @@
+{
+  "sap.app": {
+    "id": "sap.ui.demo.wt",
+    "version": "0.0.1",
+    "type": "application",
+    "title": "Flocking playground with OpenUI5 interface and CodeMirror",
+    "description": "Flocking playground with OpenUI5 interface and CodeMirror",
+    "name": "flocking-ui5playground",
+    "includes": [
+      "css/style.css"
+    ]
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_bluecrystal"
+    ]
+  },
+  "sap.ui5": {
+    "rootView": "fplay.view.App",
+    "dependencies": {
+      "minUI5Version": "1.34",
+      "libs": {
+        "sap.m": {},
+        "zlib": {}
+      }
+    },
+
+    "models": {
+      "examples": {
+        "type": "fplay.model.Examples"
+      }
+    },
+
+    "routing": {
+      "config": {
+        "routerClass": "fplay.lib.Router",
+        "viewType": "XML",
+        "viewPath": "fplay.view",
+        "controlId": "app",
+        "controlAggregation": "detailPages"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "main",
+          "target": [
+            "main",
+            "master"
+          ]
+        }
+      ],
+      "targets": {
+        "master": {
+          "controlAggregation": "masterPages",
+          "viewName": "Master",
+          "viewId": "Master"
+        },
+        "main": {
+          "viewName": "Main",
+          "viewId": "Main"
+        }
+      }
+    }
+  }
+}
