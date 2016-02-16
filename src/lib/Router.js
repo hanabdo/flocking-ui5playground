@@ -42,8 +42,8 @@ sap.ui.define([
     /**
      * a nav to method that does not write hashes but load the views properly
      */
-    navToMain: function () {
-      var oView = this.getView('fplay.view.Main', 'XML');
+    navToDetail: function () {
+      var oView = this.getView('fplay.view.Detail', 'XML');
       this._oOwner.getApp().toMaster(oView.getId(), 'show');
     },
 

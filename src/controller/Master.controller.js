@@ -37,7 +37,7 @@ sap.ui.define([
             oBinding.setContext(oContext);
           });
 
-      this.getOwnerComponent().getRouter().navToMain();
+      this.getOwnerComponent().getRouter().navToDetail();
     },
 
     /**

@@ -22,7 +22,7 @@ sap.ui.define([
     },
   });
 
-  return Controller.extend('fplay.controller.Main', {
+  return Controller.extend('fplay.controller.Detail', {
 
     /* events */
 
