@@ -21,5 +21,29 @@
 		"tab_size": 2,
 		"translate_tabs_to_spaces": true,
 		"trim_trailing_white_space_on_save": true
+	},
+	"SublimeLinter":
+	{
+		"linters":
+		{
+			"jscs": {
+				"@disable": false,
+				"maxErrors": -1,
+				"args": [
+					"-c",
+					"${project}/.jscsrc",
+					"-m",
+					"-1",
+					"--config",
+					"${project}/.jscsrc",
+				],
+				"extract": ["*.html"],
+				"excludesFiles": [
+					"bower_components/**",
+					"dist/**",
+					"node_modules/**"
+				]
+			},
+		}
 	}
 }

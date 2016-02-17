@@ -109,6 +109,15 @@ module.exports = function (grunt) {
       run: ['openui5_connect:src', 'watch'],
     },
 
+    jscs: {
+      src: '<%= dir.src %>',
+      options: {
+        config: '.jscsrc',
+        verbose: true,
+        fix: false, // Autofix code style violations when possible.
+      },
+    },
+
   });
 
   // These plugins provide necessary tasks.
@@ -118,6 +127,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-jscs');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'src' || typeof target === 'undefined') {
@@ -128,6 +138,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
+    'jscs',
     'clean:dest',
     'copy:dest',
     'openui5_preload',
