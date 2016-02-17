@@ -26,7 +26,7 @@ sap.ui.define([
      * @param {sap.ui.base.EventProvider} oControlEvent.getSource
      * @param {object} oControlEvent.getParameters
      */
-    loadExample: function (oControlEvent) {
+    onExampleSelected: function (oControlEvent) {
       var oContext = oControlEvent.getParameter('listItem')
                                   .getBindingContext('examples');
       oContext.getModel().aBindings
@@ -63,20 +63,6 @@ sap.ui.define([
       var list = this.getView().byId('idExamplesList');
       var binding = list.getBinding('items').filter(aFilters, 'Application');
     },
-
-    /**
-     * @param {sap.ui.base.Event} oControlEvent
-     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
-     * @param {object} oControlEvent.getParameters
-     */
-    handleSayHelloWorld: function (oControlEvent) {},
-
-    /**
-     * @param {sap.ui.base.Event} oControlEvent
-     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
-     * @param {object} oControlEvent.getParameters
-     */
-    handleStopPlay: function (oControlEvent) {},
 
     /* private */
 

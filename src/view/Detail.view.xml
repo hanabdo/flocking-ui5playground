@@ -17,14 +17,14 @@
       <Toolbar>
         <ToggleButton
             icon="sap-icon://hello-world"
-            press="handleSayHelloWorld"
+            press="onHelloWorldPress"
         />
 
         <ToolbarSpacer />
 
         <ToggleButton
             icon="sap-icon://play"
-            press="handleStopPlay"
+            press="onTogglePlayback"
         />
       </Toolbar>
 

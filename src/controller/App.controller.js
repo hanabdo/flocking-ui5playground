@@ -25,14 +25,6 @@ sap.ui.define([
       this.getOwnerComponent().setApp(this.byId('app'));
     },
 
-    /**
-     * [handleEventDesireMaster description]
-     * @return {[type]} [description]
-     */
-    handleEventDesireMaster: function () {
-      this.byId('app').showMaster();
-    },
-
   });
 
 });

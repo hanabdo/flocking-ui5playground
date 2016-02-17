@@ -55,7 +55,7 @@ sap.ui.define([
      * @param {sap.ui.base.EventProvider} oControlEvent.getSource
      * @param {object} oControlEvent.getParameters
      */
-    handleSayHelloWorld: function (oControlEvent) {
+    onHelloWorldPress: function (oControlEvent) {
       if (oControlEvent.getParameter('pressed')) {
         hisynth.play();
       } else {
@@ -70,7 +70,7 @@ sap.ui.define([
      * @param {sap.ui.base.EventProvider} oControlEvent.getSource
      * @param {object} oControlEvent.getParameters
      */
-    handleStopPlay: function (oControlEvent) {
+    onTogglePlayback: function (oControlEvent) {
       var isStopped = !flock.enviro.shared.model.isPlaying;
 
       oControlEvent.getSource().setPressed(isStopped);
