@@ -8,7 +8,7 @@
     xmlns:zlib="zlib"
 >
   <Page
-      title="Flocking Interactive Playground"
+      title="{i18n>detailPageTitle}"
       showNavButton="true"
       navButtonPress="onNavBack"
       enableScrolling="false"

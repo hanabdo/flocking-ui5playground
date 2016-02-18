@@ -8,7 +8,7 @@
     xmlns:zlib="zlib"
 >
   <Page
-      title="Examples"
+      title="{i18n>examplesPageTitle}"
   >
     <subHeader>
       <Toolbar
@@ -25,7 +25,7 @@
     <List
         id="idExamplesList"
         mode="SingleSelectMaster"
-        noDataText="Examples not loaded"
+        noDataText="{i18n>examplesListNoDataText}"
         selectionChange="onExampleSelected"
         items="{
           path: 'examples>/',
