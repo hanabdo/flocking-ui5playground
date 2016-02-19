@@ -23,6 +23,9 @@ sap.ui.define([
      */
     onInit: function (oControlEvent) {
       this.getOwnerComponent().setApp(this.byId('app'));
+      this.getView().addStyleClass(
+          this.getOwnerComponent().getContentDensityClass()
+      );
     },
 
   });

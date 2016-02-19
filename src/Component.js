@@ -48,6 +48,22 @@ sap.ui.define([
       return this.getProperty('app'); // return cache
     },
 
+    /**
+     * use cozy style for touch devices and compact for others
+     * {@link https://openui5.hana.ondemand.com/#docs/guide/d935dbf196d34997bf1ac42ac3e81579.html}
+     * @return {sapUiSizeCompact|sapUiSizeCozy}
+     */
+    getContentDensityClass: function () {
+      if (!this._sContentDensityClass) {
+        if (!sap.ui.Device.support.touch) {
+          this._sContentDensityClass = 'sapUiSizeCompact';
+        } else {
+          this._sContentDensityClass = 'sapUiSizeCozy';
+        }
+      }
+      return this._sContentDensityClass;
+    },
+
   });
 
   return Component;

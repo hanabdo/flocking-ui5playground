@@ -2,7 +2,7 @@
 <core:View
     controllerName="fplay.controller.Master"
     displayBlock="true"
-    class="sapUiSizeCompact MasterView"
+    class="MasterView"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:zlib="zlib"
