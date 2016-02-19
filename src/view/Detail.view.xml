@@ -11,7 +11,7 @@
       title="{i18n>detailPageTitle}"
       showNavButton="true"
       navButtonPress="onNavBack"
-      enableScrolling="false"
+      enableScrolling="true"
   >
     <content>
       <Toolbar>
