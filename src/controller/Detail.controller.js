@@ -96,6 +96,48 @@ sap.ui.define([
       }
     },
 
+    /**
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API}
+     *
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onGoFullscreen: function (oControlEvent) {
+      if (
+          // alternative standard method
+          !document.fullscreenElement &&
+          // current working methods
+          !document.mozFullScreenElement &&
+          !document.webkitFullscreenElement &&
+          !document.msFullscreenElement
+      ) {
+        if (document.body.requestFullscreen) {
+          document.body.requestFullscreen();
+        } else if (document.body.msRequestFullscreen) {
+          document.body.msRequestFullscreen();
+        } else if (document.body.mozRequestFullScreen) {
+          document.body.mozRequestFullScreen();
+        } else if (document.body.webkitRequestFullscreen) {
+          document.body.webkitRequestFullscreen(
+              document.body.ALLOW_KEYBOARD_INPUT
+          );
+        }
+        oControlEvent.getSource().setPressed(true);
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+        oControlEvent.getSource().setPressed(false);
+      }
+    },
+
     /* private */
 
     /**
