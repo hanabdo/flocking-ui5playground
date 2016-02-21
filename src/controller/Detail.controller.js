@@ -11,6 +11,7 @@
  */
 sap.ui.define([
   'sap/ui/core/mvc/Controller',
+  'zlib/Flocking',
 ], function (Controller) {
   'use strict';
 

@@ -52,6 +52,12 @@
         }
       ]
     },
+    "resourceRoots": {
+      "fplay": "./",
+      "zlib": "./zlib",
+      "zlib.CodeMirror.native": "resources",
+      "zlib.Flocking.native": "resources"
+    },
     "routing": {
       "config": {
         "routerClass": "fplay.lib.Router",

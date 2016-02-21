@@ -8,11 +8,18 @@
  */
 /**
  * @requires sap.m.TextArea
+ * @requires CodeMirror
  */
 sap.ui.define([
   'sap/m/TextArea',
+  'zlib/CodeMirror/native/lib/codemirror',
 ], function (TextArea) {
   'use strict';
+
+  // native css
+  jQuery.sap.includeStyleSheet(
+      jQuery.sap.getModulePath('zlib.CodeMirror.native.lib.codemirror', '.css')
+  );
 
   // custom css
   jQuery.sap.includeStyleSheet(
@@ -28,10 +35,18 @@ sap.ui.define([
    * https://codemirror.net/doc/manual.html#config
    *
    * @property {sap.ui.core.CSSSize} [height='auto']
+   *
+   * @property {string} [mode=undefined]
+   * @property {string} [theme=undefined]
    * @property {boolean} [lineNumbers=true]
    * @property {boolean} [lineWrapping=true]
    * @property {boolean} [readOnly=false]
-   * @property {boolean} [autoCloseBrackets=true] requires closebrackets.js
+   * @property {boolean} [autoCloseBrackets=true]
+   * @property {boolean} [matchBrackets=true]
+   * @property {object} [highlightSelectionMatches={
+            showToken: /\w/,
+            annotateScrollbar: false, // disabled due to bug
+     }]
    *
    * @class zlib.Codemirror
    * @extends sap.m.TextArea
@@ -89,12 +104,6 @@ sap.ui.define([
             showToken: /\w/,
             annotateScrollbar: false, // disabled due to bug
           },
-          requires: [/** @todo TBI, not implenented yet **/
-            'addon/scroll/annotatescrollbar.js',
-            'addon/scroll/matchesonscrollbar.js',
-            'addon/scroll/searchcursor.js',
-            'addon/scroll/match-highlighter.js',
-          ],
         },
 
       },
@@ -189,6 +198,68 @@ sap.ui.define([
     setVisible: function (bVisible) {
       this.setProperty('visible', bVisible);
       this.rerender();
+    },
+
+    /**
+     * @param {[type]} val [description]
+     */
+    setTheme: function (val) {
+      this.setProperty('theme', val);
+      jQuery.sap.includeStyleSheet(
+          jQuery.sap.getModulePath(
+              'zlib.CodeMirror.native.theme.' + val, '.css'
+          )
+      );
+    },
+
+    /**
+     * @param {string} val [description]
+     */
+    setMode: function (val) {
+      this.setProperty('mode', val);
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.mode.' + val + '.' + val
+      );
+    },
+
+    /**
+     * @param {boolean} val [description]
+     */
+    setAutoCloseBrackets: function (val) {
+      this.setProperty('autoCloseBrackets', val);
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.addon.edit.closebrackets'
+      );
+    },
+
+    /**
+     * @param {boolean} val [description]
+     */
+    setMatchBrackets: function (val) {
+      this.setProperty('matchBrackets', val);
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.addon.edit.matchbrackets'
+      );
+    },
+
+    /**
+     * @param {object} val [description]
+     */
+    setHighlightSelectionMatches: function (val) {
+      this.setProperty('highlightSelectionMatches', val);
+
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.addon.scroll.annotatescrollbar'
+      );
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.addon.scroll.matchesonscrollbar'
+      );
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.addon.scroll.searchcursor'
+      );
+      jQuery.sap.require(
+          'zlib.CodeMirror.native.addon.scroll.match-highlighter'
+      );
     },
 
     /* public */
