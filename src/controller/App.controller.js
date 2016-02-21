@@ -11,7 +11,7 @@
  */
 sap.ui.define([
   'sap/ui/core/mvc/Controller',
-], function (Controller, ExamplesModel) {
+], function (Controller) {
   'use strict';
 
   return Controller.extend('fplay.controller.App', {
