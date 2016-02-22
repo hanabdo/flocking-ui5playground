@@ -9,7 +9,7 @@
     "description": "{{appDescription}}",
     "name": "flocking-ui5playground",
     "applicationVersion": {
-      "version": "0.0.1-f177036"
+      "version": "0.0.1-046f218"
     }
   },
   "sap.ui": {
@@ -56,7 +56,7 @@
       "fplay": "./",
       "zlib": "./zlib",
       "zlib.CodeMirror.native": "https://npmcdn.com/codemirror@5.11.0",
-      "zlib.Flocking.native": "https://npmcdn.com/codemirror@0.1.5"
+      "zlib.Flocking.native": "https://npmcdn.com/flocking@0.1.5"
     },
     "routing": {
       "config": {
