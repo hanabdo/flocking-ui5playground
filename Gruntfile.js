@@ -9,16 +9,11 @@
 
 'use strict';
 module.exports = function (grunt) {
-  // load all npm grunt tasks
-  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
 
     /* vars */
 
-    pkg: grunt.file.readJSON('package.json'),
-    bower: '',
-    githash: {main: {}},
     dir: {
       src: 'src',
       lib: 'zlib',
@@ -123,102 +118,16 @@ module.exports = function (grunt) {
       },
     },
 
-    bump: {
-      options: {
-        files: ['package.json'],
-        updateConfigs: [],
-        commit: true,
-        commitMessage: 'Release v%VERSION%',
-        commitFiles: ['package.json'],
-        createTag: true,
-        tagName: 'v%VERSION%',
-        tagMessage: 'Version %VERSION%',
-        push: true,
-        pushTo: 'origin',
-        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
-        globalReplace: false,
-        prereleaseName: false,
-        metadata: '',
-        regExp: false,
-      },
-    },
-
-    'string-replace': {
-      destindexhtml: {
-        files: {
-          'dist/index.html': 'src/index.html',
-        },
-        options: {
-          replacements: [{
-            pattern: /src=[^\n]*/ig,
-            replacement: 'src="https://openui5.hana.ondemand.com/<%= bower.dependencies["openui5-sap.m"].pkgMeta.version %>/resources/sap-ui-core.js"',
-          }],
-        },
-      },
-    },
-
-    modify_json: {
-      destmanifest: {
-        src: 'dist/manifest.json',
-        options: {
-          add: true,
-          indent: '  ',
-          fields: {
-            'sap.app': {
-              applicationVersion: {
-                version: '<%= pkg.version %>-<%= githash.main.short %>',
-              },
-            },
-            'sap.ui5': {
-              resourceRoots: {
-                'zlib.CodeMirror.native': 'https://npmcdn.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>',
-                'zlib.Flocking.native': 'https://npmcdn.com/codemirror@<%= bower.dependencies.flocking.pkgMeta.version %>',
-              },
-            },
-          },
-        },
-      },
-      srcmanifest: {
-        src: 'src/manifest.json',
-        options: {
-          add: true,
-          indent: '  ',
-          fields: {
-            'sap.app': {
-              applicationVersion: {
-                version: '<%= pkg.version %>',
-              },
-            },
-          },
-        },
-      },
-    },
-
-    shell: {
-      bower: {
-        command: 'bower -j list',
-        options: {
-          callback: store,
-          stderr: false,
-          stdout: false,
-        },
-      },
-    },
-
-    'gh-pages': {
-      options: {
-        base: 'dist',
-        tag: '<%= githash.main %>',
-      },
-      src: '**/*',
-    },
-
   });
 
-  function store(err, stdout, stderr, fCallBack) {
-    grunt.config('bower', JSON.parse(stdout));
-    fCallBack();
-  };
+  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-openui5');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-jscs');
 
   grunt.registerTask('serve', function (target) {
     if (target === 'src' || typeof target === 'undefined') {
@@ -232,25 +141,7 @@ module.exports = function (grunt) {
     'jscs',
     'clean:dest',
     'copy:dest',
-    'githash',
-    'shell:bower',
-    'modify_json:destmanifest',
-    'string-replace:destindexhtml',
     'openui5_preload',
-  ]);
-
-  grunt.registerTask('releasepatch-1', [
-    'bump-only:patch',
-  ]);
-
-  grunt.registerTask('releasepatch-2', [
-    'githash',
-    'modify_json:srcmanifest',
-    'bump-commit',
-  ]);
-
-  grunt.registerTask('deploy', [
-    'gh-pages',
   ]);
 
   // Default task
