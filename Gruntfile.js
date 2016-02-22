@@ -26,22 +26,7 @@ module.exports = function (grunt) {
       bower_components: 'bower_components',
     },
 
-    /* body */
-
-    clean: {
-      dest: [
-        '<%= dir.dest %>',
-      ],
-    },
-
-    copy: {
-      dest: {
-        cwd: '<%= dir.src %>',
-        src: ['**/*'],
-        dest: '<%= dir.dest %>',
-        expand: true,
-      },
-    },
+    /* develop */
 
     connect: {
       options: {
@@ -51,29 +36,6 @@ module.exports = function (grunt) {
       },
       src: {},
       dist: {},
-    },
-
-    openui5_preload: {
-
-      component: {
-        options: {
-          resources: {
-            cwd: '<%= dir.src %>',
-            prefix: '<%= dir.src %>',
-          },
-          dest: '<%= dir.dest %>',
-        },
-        components: '<%= dir.src %>',
-      },
-
-      library: {
-        options: {
-          resources: '<%= dir.src %>',
-          dest: '<%= dir.dest %>',
-        },
-        libraries: '<%= dir.lib %>',
-      },
-
     },
 
     openui5_connect: {
@@ -124,6 +86,42 @@ module.exports = function (grunt) {
     },
 
     /* build */
+
+    clean: {
+      dest: [
+        '<%= dir.dest %>',
+      ],
+    },
+
+    copy: {
+      dest: {
+        cwd: '<%= dir.src %>',
+        src: ['**/*'],
+        dest: '<%= dir.dest %>',
+        expand: true,
+      },
+    },
+
+    openui5_preload: {
+      component: {
+        options: {
+          resources: {
+            cwd: '<%= dir.src %>',
+            prefix: '<%= dir.src %>',
+          },
+          dest: '<%= dir.dest %>',
+        },
+        components: '<%= dir.src %>',
+      },
+
+      library: {
+        options: {
+          resources: '<%= dir.src %>',
+          dest: '<%= dir.dest %>',
+        },
+        libraries: '<%= dir.lib %>',
+      },
+    },
 
     bump: {
       options: {
@@ -250,6 +248,21 @@ module.exports = function (grunt) {
 
   });
 
+  // Default task
+  grunt.registerTask('default', [
+    'concurrent:run',
+  ]);
+
+  /* develop */
+
+  grunt.registerTask('serve', function (target) {
+    if (target === 'src' || typeof target === 'undefined') {
+      grunt.task.run('concurrent:run');
+    } else if (target === 'dist') {
+      grunt.task.run('openui5_connect:dist');
+    }
+  });
+
   /* build */
 
   function store(err, stdout, stderr, fCallBack) {
@@ -296,18 +309,4 @@ module.exports = function (grunt) {
     'gh-pages',                         // publish to github
   ]);
 
-  /* develop */
-
-  grunt.registerTask('serve', function (target) {
-    if (target === 'src' || typeof target === 'undefined') {
-      grunt.task.run('concurrent:run');
-    } else if (target === 'dist') {
-      grunt.task.run('openui5_connect:dist');
-    }
-  });
-
-  // Default task
-  grunt.registerTask('default', [
-    'concurrent:run',
-  ]);
 };
