@@ -55,8 +55,8 @@
     "resourceRoots": {
       "fplay": "./",
       "zlib": "./zlib",
-      "zlib.CodeMirror.native": "https://npmcdn.com/codemirror@5.11.0",
-      "zlib.Flocking.native": "https://npmcdn.com/flocking@0.1.5"
+      "zlib.CodeMirror.native": "https://npmcdn.com/codemirror@5.11.0/",
+      "zlib.Flocking.native": "https://npmcdn.com/flocking@0.1.5/"
     },
     "routing": {
       "config": {
