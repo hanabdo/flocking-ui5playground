@@ -9,11 +9,16 @@
 
 'use strict';
 module.exports = function (grunt) {
+  // load all npm grunt tasks
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
 
     /* vars */
 
+    pkg: grunt.file.readJSON('package.json'),
+    bower: '',
+    githash: {main: {}},
     dir: {
       src: 'src',
       lib: 'zlib',
@@ -118,16 +123,180 @@ module.exports = function (grunt) {
       },
     },
 
+    /* build */
+
+    bump: {
+      options: {
+        files: ['package.json'],
+        updateConfigs: [],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json'],
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'origin',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+        globalReplace: false,
+        prereleaseName: false,
+        metadata: '',
+        regExp: false,
+      },
+    },
+
+    'string-replace': {
+      // update openui5 src url
+      destindexhtml: {
+        files: {
+          'dist/index.html': 'dist/index.html',
+        },
+        options: {
+          replacements: [{
+            pattern: /src=[^\n]*/ig,
+            replacement: 'src="https://openui5.hana.ondemand.com/<%= bower.dependencies["openui5-sap.m"].pkgMeta.version %>/resources/sap-ui-core.js"',
+          }],
+        },
+      },
+      // update index.html resource roots
+      // @todo why manifest JSON resourceroots not sufficient?
+      destresourceroots: {
+        files: {
+          'dist/index.html': 'dist/index.html',
+        },
+        options: {
+          replacements: [{
+            pattern: /zlib.CodeMirror.native\": \"[^\"]*/ig,
+            replacement: 'zlib.CodeMirror.native": "https://npmcdn.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>/',
+          }, {
+            pattern: /zlib.Flocking.native\": \"[^\"]*/ig,
+            replacement: 'zlib.Flocking.native": "https://npmcdn.com/flocking@<%= bower.dependencies.flocking.pkgMeta.version %>/',
+          }],
+        },
+      },
+    },
+
+    modify_json: {
+      // update version
+      destmanifestversion: {
+        src: 'dist/manifest.json',
+        options: {
+          add: true,
+          indent: '  ',
+          fields: {
+            'sap.app': {
+              applicationVersion: {
+                version: '<%= pkg.version %>-<%= githash.main.short %>',
+              },
+            },
+          },
+        },
+      },
+      // update resourceRoots
+      destmanifestresourceroots: {
+        src: 'dist/manifest.json',
+        options: {
+          add: true,
+          indent: '  ',
+          fields: {
+            'sap.ui5': {
+              resourceRoots: {
+                'zlib.CodeMirror.native': 'https://npmcdn.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>/',
+                'zlib.Flocking.native': 'https://npmcdn.com/flocking@<%= bower.dependencies.flocking.pkgMeta.version %>/',
+              },
+            },
+          },
+        },
+      },
+      // update version
+      srcmanifest: {
+        src: 'src/manifest.json',
+        options: {
+          add: true,
+          indent: '  ',
+          fields: {
+            'sap.app': {
+              applicationVersion: {
+                version: '<%= pkg.version %>',
+              },
+            },
+          },
+        },
+      },
+    },
+
+    shell: {
+      // fetch bower info
+      bower: {
+        command: 'bower -j list',
+        options: {
+          callback: store,
+          stderr: false,
+          stdout: false,
+        },
+      },
+    },
+
+    /* deploy */
+
+    'gh-pages': {
+      options: {
+        base: '<%= dir.dest %>',
+        message: 'v<%= pkg.version %>-<%= githash.main.short %>\n\n' +
+                 'Auto generated commit',
+      },
+      src: '**/*',
+    },
+
   });
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-openui5');
-  grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-jscs');
+  /* build */
+
+  function store(err, stdout, stderr, fCallBack) {
+    grunt.config('bower', JSON.parse(stdout));
+    fCallBack();
+  };
+
+  grunt.registerTask('buildprepare', [
+    'jscs',                            // js linter checks
+    'clean:dest',                      // clean destination folder
+    'copy:dest',                       // src -> dest
+    'githash',                         // fetch git info
+    'shell:bower',                     // fetch bower info
+  ]);
+
+  grunt.registerTask('build', [
+    'buildprepare',
+    'modify_json:destmanifestversion', // update resourcePath and version
+    'openui5_preload',                 // make component/library preload
+  ]);
+
+  // by some reason should run in two steps
+  grunt.registerTask('releasepatch-1', [
+    'bump-only:patch',               // increment patch version
+  ]);
+
+  grunt.registerTask('releasepatch-2', [
+    'githash',                         // fetch git info
+    'modify_json:destmanifestversion', // update version
+    'bump-commit',                     // commit, tag, push
+  ]);
+
+  /* deploy */
+
+  grunt.registerTask('deploy', [
+    'buildprepare',
+
+    'modify_json:destmanifestversion',  // replace resourcePath and version
+    'modify_json:destmanifestresourceroots',
+    'string-replace:destresourceroots',
+    'string-replace:destindexhtml',     // update openui5 src url
+    'openui5_preload',                  // make component/library preload
+
+    'gh-pages',                         // publish to github
+  ]);
+
+  /* develop */
 
   grunt.registerTask('serve', function (target) {
     if (target === 'src' || typeof target === 'undefined') {
@@ -136,13 +305,6 @@ module.exports = function (grunt) {
       grunt.task.run('openui5_connect:dist');
     }
   });
-
-  grunt.registerTask('build', [
-    'jscs',
-    'clean:dest',
-    'copy:dest',
-    'openui5_preload',
-  ]);
 
   // Default task
   grunt.registerTask('default', [
