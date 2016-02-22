@@ -1,0 +1,92 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+    "_version": "1.1.0",
+    "id": "fplay",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "name": "flocking-ui5playground",
+    "applicationVersion": {
+      "version": "0.0.1-f177036"
+    }
+  },
+  "sap.ui": {
+    "_version": "1.1.0",
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_bluecrystal"
+    ]
+  },
+  "sap.ui5": {
+    "_version": "1.1.0",
+    "rootView": "fplay.view.App",
+    "dependencies": {
+      "minUI5Version": "1.34",
+      "libs": {
+        "sap.m": {},
+        "zlib": {}
+      }
+    },
+    "models": {
+      "examples": {
+        "type": "fplay.model.Examples"
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "fplay.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "resourceRoots": {
+      "fplay": "./",
+      "zlib": "./zlib",
+      "zlib.CodeMirror.native": "https://npmcdn.com/codemirror@5.11.0",
+      "zlib.Flocking.native": "https://npmcdn.com/codemirror@0.1.5"
+    },
+    "routing": {
+      "config": {
+        "routerClass": "fplay.lib.Router",
+        "viewType": "XML",
+        "viewPath": "fplay.view",
+        "controlId": "app",
+        "controlAggregation": "detailPages"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "detail",
+          "target": [
+            "detail",
+            "master"
+          ]
+        }
+      ],
+      "targets": {
+        "master": {
+          "controlAggregation": "masterPages",
+          "viewName": "Master",
+          "viewId": "Master"
+        },
+        "detail": {
+          "viewName": "Detail",
+          "viewId": "Detail"
+        }
+      }
+    }
+  }
+}

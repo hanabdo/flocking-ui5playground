@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<core:View
+    controllerName="fplay.controller.Detail"
+    displayBlock="true"
+    class="DetailView"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:zlib="zlib"
+>
+  <Page
+      title="{i18n>detailPageTitle}"
+      showNavButton="true"
+      navButtonPress="onNavBack"
+      enableScrolling="true"
+  >
+    <content>
+      <Toolbar>
+        <ToggleButton
+            icon="sap-icon://hello-world"
+            press="onHelloWorldPress"
+        />
+        <ToggleButton
+            icon="sap-icon://full-screen"
+            press="onGoFullscreen"
+        />
+
+        <ToolbarSpacer />
+
+        <ToggleButton
+            icon="sap-icon://play"
+            press="onTogglePlayback"
+        />
+      </Toolbar>
+
+      <zlib:Codemirror
+          id="jseditor"
+          theme="solarized"
+          mode="javascript"
+          value="{
+            path: 'examples>code',
+            formatter: '.formatLoadedExample'
+          }"
+      />
+    </content>
+  </Page>
+</core:View>
