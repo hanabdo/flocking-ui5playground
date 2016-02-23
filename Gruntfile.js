@@ -79,16 +79,32 @@ module.exports = function (grunt) {
           config: 'sassconfig.rb',
         },
       },
+      'compilesrc-cm': {
+        options: {
+          config: 'sassconfig-cm.rb',
+        },
+      },
       watchsrc: {
         options: {
           config: 'sassconfig.rb',
           watch: true,
         },
       },
+      'watchsrc-cm': {
+        options: {
+          config: 'sassconfig-cm.rb',
+          watch: true,
+        },
+      },
     },
 
     concurrent: {
-      run: ['openui5_connect:src', 'watch', 'compass:watchsrc'],
+      run: [
+        'openui5_connect:src',
+        'watch',
+        'compass:watchsrc',
+        'compass:watchsrc-cm',
+      ],
     },
 
     jscs: {
@@ -106,6 +122,7 @@ module.exports = function (grunt) {
       dest: [
         '<%= dir.dest %>',
         '<%= dir.src %>/css',
+        '<%= dir.src %>/zlib/Codemirror.css',
       ],
     },
 
@@ -298,6 +315,7 @@ module.exports = function (grunt) {
     'jscs',                            // js linter checks
     'clean:dest',                      // clean destination folder
     'compass:compilesrc',              // generate css files
+    'compass:compilesrc-cm',
     'copy:dest',                       // src -> dest
     'githash',                         // fetch git info
     'shell:bower',                     // fetch bower info
