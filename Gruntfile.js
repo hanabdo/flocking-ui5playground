@@ -296,8 +296,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('buildprepare', [
     'jscs',                            // js linter checks
-    'compass:compilesrc',              // generate css files
     'clean:dest',                      // clean destination folder
+    'compass:compilesrc',              // generate css files
     'copy:dest',                       // src -> dest
     'githash',                         // fetch git info
     'shell:bower',                     // fetch bower info
