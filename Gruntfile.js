@@ -164,6 +164,10 @@ module.exports = function (grunt) {
       destindexhtml: {
         files: {
           'dist/index.html': 'dist/index.html',
+          'dist/test/integration/opaTests.qunit.html':
+                             'dist/test/integration/opaTests.qunit.html',
+          'dist/test/unit/unitTests.qunit.html':
+                             'dist/test/unit/unitTests.qunit.html',
         },
         options: {
           replacements: [{
@@ -177,6 +181,10 @@ module.exports = function (grunt) {
       destresourceroots: {
         files: {
           'dist/index.html': 'dist/index.html',
+          'dist/test/integration/opaTests.qunit.html':
+                             'dist/test/integration/opaTests.qunit.html',
+          'dist/test/unit/unitTests.qunit.html':
+                             'dist/test/unit/unitTests.qunit.html',
         },
         options: {
           replacements: [{
