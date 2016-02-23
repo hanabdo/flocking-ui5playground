@@ -1,36 +1,32 @@
+/* line 1, Codemirror.sass */
 .zCodemirror {
   display: flex;
-  /*border: 1px solid #cdcdcd !important;*/
   border-right: 1px solid #cdcdcd !important;
 }
-
-/* Codemirror */
-.CodeMirror {
-    height: auto !important;
+/* line 5, Codemirror.sass */
+.zCodemirror > .CodeMirror {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: auto !important;
 }
-.CodeMirror.CodeMirror-wrap {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+/* line 10, Codemirror.sass */
+.zCodemirror > .CodeMirror span {
+  word-break: break-all;
 }
-.CodeMirror-scroll {
-    flex-grow: 1;
-    /*flex-shrink: 0; break things*/
+/* line 12, Codemirror.sass */
+.zCodemirror > .CodeMirror > .CodeMirror-scroll {
+  flex-grow: 1;
 }
-.CodeMirror span {
-    word-break: break-all;
+/* line 15, Codemirror.sass */
+.zCodemirror > .CodeMirror .cm-matchhighlight {
+  background-color: lightgreen;
 }
-
-/* match highlight */
-.cm-matchhighlight {
-    background-color: lightgreen;
+/* line 18, Codemirror.sass */
+.zCodemirror > .CodeMirror .CodeMirror-selection-highlight-scrollbar {
+  background-color: green;
 }
-/** @todo TBI, stub for highlight matches on scrollbar */
-.CodeMirror-selection-highlight-scrollbar {
-    background-color: green
-}
-
-/* solarized theme fix */
-.CodeMirror.cm-s-solarized.CodeMirror-wrap {
-    box-shadow: inherit !important;
+/* line 20, Codemirror.sass */
+.zCodemirror > .cm-s-solarized {
+  box-shadow: inherit !important;
 }
