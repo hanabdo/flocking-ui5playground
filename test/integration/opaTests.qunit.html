@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Opa tests for Flocking Plauground</title>
+
   <meta http-equiv='X-UA-Compatible' content='IE=edge'/>
   <meta charset="UTF-8">
 
@@ -11,8 +12,8 @@
       data-sap-ui-resourceroots='{
         "fplay": "../../",
         "zlib": "../../zlib",
-        "zlib.CodeMirror.native": "/resources",
-        "zlib.Flocking.native": "/resources"
+        "zlib.CodeMirror.native": "https://npmcdn.com/codemirror@5.11.0/",
+        "zlib.Flocking.native": "https://npmcdn.com/flocking@0.1.5/"
       }'
   >
   </script>
@@ -32,9 +33,11 @@
   </script>
 
 </head>
+
 <body>
-<div id="content"></div>
-<div id="qunit"></div>
-<div id="qunit-fixture"></div>
+  <div id="content"></div>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
 </body>
+
 </html>

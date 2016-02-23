@@ -8,6 +8,14 @@ sap.ui.require([
   Opa5.createPageObjects({
     onTheAppPage: {
       actions: {
+        iSpendSomeTime: function () {
+          return this.waitFor({
+            controlType: 'sap.m.SplitApp',
+            success: function (oApp) {},
+            errorMessage: 'Did not fint the application (sap.m.SplitApp)',
+          });
+        },
+
         iPressExamplesListItem: function () {
           return this.waitFor({
             controlType: 'sap.m.List',

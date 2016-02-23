@@ -2,19 +2,22 @@
 <html>
 <head>
   <title>Unit tests for Playground</title>
+
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta charset="utf-8">
+
   <script
       id="sap-ui-bootstrap"
       src="/resources/sap-ui-core.js"
       data-sap-ui-resourceroots='{
         "fplay": "../../",
         "zlib": "../../zlib",
-        "zlib.CodeMirror.native": "/resources",
-        "zlib.Flocking.native": "/resources"
+        "zlib.CodeMirror.native": "https://npmcdn.com/codemirror@5.11.0/",
+        "zlib.Flocking.native": "https://npmcdn.com/flocking@0.1.5/"
       }'
   >
   </script>
+
   <script>
     jQuery.sap.require("sap.ui.qunit.qunit-css");
     jQuery.sap.require("sap.ui.thirdparty.qunit");
@@ -23,14 +26,17 @@
     // model tests
     jQuery.sap.require("fplay.test.unit.model.formatter");
   </script>
+
 </head>
+
 <body>
-<div id="content"></div>
-<h1 id="qunit-header">Unit tests for Playground</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture"></div>
+  <div id="content"></div>
+  <h1 id="qunit-header">Unit tests for Playground</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture"></div>
 </body>
+
 </html>

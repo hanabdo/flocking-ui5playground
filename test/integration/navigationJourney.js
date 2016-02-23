@@ -8,7 +8,8 @@ sap.ui.require([
     Given.iStartMyAppInAFrame(
         jQuery.sap.getResourcePath('fplay', '/index.html')
     );
-    When.onTheAppPage.iStoreEditorValue().and
+    When.onTheAppPage.iSpendSomeTime().and
+                     .iStoreEditorValue().and
                      .iPressExamplesListItem();
     Then.onTheAppPage.iShouldSeeEditorChange().and
                      .iTeardownMyAppFrame();
