@@ -147,11 +147,16 @@ sap.ui.define([
      * @return {[type]} [description]
      */
     formatLoadedExample: function (aLines) {
+      jQuery.sap.assert(Array.isArray(aLines) &&
+                        typeof aLines[0] === 'string',
+                        'Hey! It should be array of strings!'
+      );
+
       if (typeof aLines === 'undefined' || aLines === null) {
         return undefined;
       } else if (Array.isArray(aLines)) {
         return aLines.join('\n');
-      } else if (aLines === 'string') {
+      } else if (typeof aLines === 'string') {
         return aLines;
       } else {
         return undefined;
