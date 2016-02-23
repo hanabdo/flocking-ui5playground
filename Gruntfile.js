@@ -72,8 +72,23 @@ module.exports = function (grunt) {
       },
     },
 
+    // sass tasks
+    compass: {
+      compilesrc: {
+        options: {
+          config: 'sassconfig.rb',
+        },
+      },
+      watchsrc: {
+        options: {
+          config: 'sassconfig.rb',
+          watch: true,
+        },
+      },
+    },
+
     concurrent: {
-      run: ['openui5_connect:src', 'watch'],
+      run: ['openui5_connect:src', 'watch', 'compass:watchsrc'],
     },
 
     jscs: {
@@ -90,6 +105,7 @@ module.exports = function (grunt) {
     clean: {
       dest: [
         '<%= dir.dest %>',
+        '<%= dir.src %>/css',
       ],
     },
 
@@ -272,6 +288,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('buildprepare', [
     'jscs',                            // js linter checks
+    'compass:compilesrc',              // generate css files
     'clean:dest',                      // clean destination folder
     'copy:dest',                       // src -> dest
     'githash',                         // fetch git info
