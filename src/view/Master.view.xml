@@ -10,6 +10,13 @@
   <Page
       title="{i18n>examplesPageTitle}"
   >
+    <headerContent>
+      <Button
+        icon="sap-icon://menu2"
+        press="onMenuPress"
+      />
+    </headerContent>
+
     <subHeader>
       <Toolbar
           class="DetailView__Toolbar"
@@ -18,6 +25,14 @@
         <SearchField
             liveChange="onExampleSearch"
             width="100%"
+        />
+        <Button
+          icon="sap-icon://navigation-up-arrow"
+          press="onUpPress"
+        />
+        <Button
+          icon="sap-icon://navigation-down-arrow"
+          press="onDownPress"
         />
       </Toolbar>
     </subHeader>
