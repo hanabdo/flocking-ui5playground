@@ -47,7 +47,6 @@ sap.ui.define([
             showToken: /\w/,
             annotateScrollbar: false, // disabled due to bug
      }]
-   * @property {boolean} [foldGutter=true]
    *
    * @class zlib.Codemirror
    * @extends sap.m.TextArea
@@ -106,18 +105,7 @@ sap.ui.define([
             annotateScrollbar: false, // disabled due to bug
           },
         },
-        foldGutter: {
-          type: 'boolean',
-          group: 'CodemirrorConfig',
-          defaultValue: false,
-        },
 
-        gutters: {
-          type: 'string[]',
-          group: 'CodemirrorConfig',
-          defaultValue: [],
-          private: true,
-        },
       },
       aggregations: {},
       events: {
@@ -165,8 +153,6 @@ sap.ui.define([
               autoCloseBrackets: this.getAutoCloseBrackets(),
               matchBrackets: this.getMatchBrackets(),
               highlightSelectionMatches: this.getHighlightSelectionMatches(),
-              foldGutter: this.getFoldGutter(),
-              gutters: this.getGutters(),
             }
         );
         this._editor.on('changes', this._setValue.bind(this));
@@ -212,18 +198,6 @@ sap.ui.define([
     setVisible: function (bVisible) {
       this.setProperty('visible', bVisible);
       this.rerender();
-    },
-
-    /**
-     * @param      {boolean}  bVisible
-     */
-    setLineNumbers: function (val) {
-      this.setProperty('lineNumbers', val);
-      if (val) {
-        this.insertGutter('CodeMirror-linenumbers');
-      } else {
-        this.removeGutter('CodeMirror-linenumbers');
-      }
     },
 
     /**
@@ -286,83 +260,6 @@ sap.ui.define([
       jQuery.sap.require(
           'zlib.CodeMirror.native.addon.scroll.match-highlighter'
       );
-    },
-
-    /**
-     * @param {object} val [description]
-     */
-    setFoldGutter: function (val) {
-      this.setProperty('foldGutter', val);
-
-      if (val) {
-        jQuery.sap.includeStyleSheet(jQuery.sap.getModulePath(
-            'zlib.CodeMirror.native.addon.fold.foldgutter',  '.css'
-        ));
-        jQuery.sap.require(
-            'zlib.CodeMirror.native.addon.fold.foldcode'
-        );
-        jQuery.sap.require(
-            'zlib.CodeMirror.native.addon.fold.foldgutter'
-        );
-        jQuery.sap.require(
-            'zlib.CodeMirror.native.addon.fold.brace-fold'
-        );
-        jQuery.sap.require(
-            'zlib.CodeMirror.native.addon.fold.comment-fold'
-        );
-
-        this.insertGutter('CodeMirror-foldgutter');
-      } else {
-        this.removeGutter('CodeMirror-foldgutter');
-      }
-
-    },
-
-    /**
-     * return copy
-     * @return {string[]}
-     */
-    getGutters: function () {
-      return jQuery.extend([], this.getProperty('gutters'));
-    },
-
-    /**
-     * @param  {string} sGutter
-     */
-    insertGutter: function (sGutter) {
-      jQuery.sap.assert(
-        typeof sGutter === 'string',
-        'gutter should be type of string'
-      );
-
-      if (this.getProperty('gutters').indexOf(sGutter) === -1) {
-        this.setProperty(
-          'gutters',
-          [sGutter].concat(this.getProperty('gutters'))
-        );
-      }
-    },
-
-    /**
-     * @param  {string} sGutter
-     */
-    removeGutter: function (sGutter) {
-      jQuery.sap.assert(
-        typeof sGutter === 'string',
-        'gutter should be type of string'
-      );
-
-      var i = this.getProperty('gutters').indexOf(sGutter);
-      if (i !== -1) {
-        this.getProperty('gutters').splice(i, 1);
-      }
-    },
-
-    /**
-     *
-     */
-    removeAllGutters: function () {
-      this.setProperty('gutters', []);
     },
 
     /* public */
