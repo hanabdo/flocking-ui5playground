@@ -13,6 +13,14 @@
       navButtonPress="onNavBack"
       enableScrolling="true"
   >
+    <headerContent>
+      <Link
+        text="Flocking JS"
+        press="handleLinkPress"
+        href="http://flockingjs.org/"
+      />
+    </headerContent>
+
     <content>
       <Toolbar>
         <ToggleButton
@@ -40,6 +48,8 @@
             path: 'examples>code',
             formatter: '.formatLoadedExample'
           }"
+          foldGutter="true"
+          lineNumbers="true"
       />
     </content>
   </Page>

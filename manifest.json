@@ -9,7 +9,7 @@
     "description": "{{appDescription}}",
     "name": "flocking-ui5playground",
     "applicationVersion": {
-      "version": "0.0.1-63d4edc"
+      "version": "0.0.1-5cbe418"
     }
   },
   "sap.ui": {
