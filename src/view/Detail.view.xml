@@ -13,6 +13,13 @@
       navButtonPress="onNavBack"
       enableScrolling="true"
   >
+    <headerContent>
+      <Button
+          icon="sap-icon://sys-help"
+          press="onAboutPress"
+      />
+    </headerContent>
+
     <content>
       <Toolbar>
         <ToggleButton
@@ -40,6 +47,8 @@
             path: 'examples>code',
             formatter: '.formatLoadedExample'
           }"
+          foldGutter="true"
+          lineNumbers="true"
       />
     </content>
   </Page>

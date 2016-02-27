@@ -11,8 +11,9 @@
  */
 sap.ui.define([
   'sap/ui/core/mvc/Controller',
+  'fplay/controller/AboutDialog',
   'zlib/Flocking',
-], function (Controller) {
+], function (Controller, AboutDialog) {
   'use strict';
 
   var hisynth = flock.synth({
@@ -24,6 +25,7 @@ sap.ui.define([
   });
 
   return Controller.extend('fplay.controller.Detail', {
+    _oAboutDialog: null,
 
     /* events */
 
@@ -47,6 +49,15 @@ sap.ui.define([
       } else {
         this.getOwnerComponent().getApp().showMaster();
       }
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onAboutPress: function (oControlEvent) {
+      this._getAboutDialog().open();
     },
 
     /**
@@ -161,6 +172,16 @@ sap.ui.define([
       } else {
         return undefined;
       }
+    },
+
+    /**
+     * lazy create menu dialog
+     */
+    _getAboutDialog: function () {
+      if (!this._oAboutDialog) {
+        this._oAboutDialog = new AboutDialog(this.getView());
+      }
+      return this._oAboutDialog;
     },
 
   });

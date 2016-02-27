@@ -8,16 +8,22 @@
  */
 /**
  * @requires sap.ui.core.mvc.Controller
+ * @requires sap.ui.model.Filter
+ * @requires sap.ui.model.FilterOperator
+ * @requires sap.m.GroupHeaderListItem
+ * @requires fplay.controller.MenuDialog
  */
 sap.ui.define([
   'sap/ui/core/mvc/Controller',
   'sap/ui/model/Filter',
   'sap/ui/model/FilterOperator',
   'sap/m/GroupHeaderListItem',
-], function (Controller, Filter, FilterOperator, GroupHeaderListItem) {
+  'fplay/controller/MenuDialog',
+], function (Controller, Filter, FilterOperator, GroupHeaderListItem, MenuDialog) {
   'use strict';
 
   return Controller.extend('fplay.controller.Master', {
+    _oMenuDialog: null,
 
     /* events */
 
@@ -64,6 +70,41 @@ sap.ui.define([
       var binding = list.getBinding('items').filter(aFilters, 'Application');
     },
 
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onUpPress: function (oControlEvent) {
+      // var oContext = oControlEvent.getParameter('listItem')
+      //                             .getBindingContext('examples');
+      // oContext.getModel().aBindings
+      //     .filter(function (oJSONListBinding) {
+      //       return oJSONListBinding.getPath() === 'code';
+      //     })
+      //     .forEach(function (oBinding) {
+      //       oBinding.setContext(oContext);
+      //     });
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onDownPress: function (oControlEvent) {
+
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onMenuPress: function (oControlEvent) {
+      this._getMenuDialog().open();
+    },
+
     /* private */
 
     /**
@@ -76,6 +117,16 @@ sap.ui.define([
         title: oGroup.key,
         upperCase: false,
       });
+    },
+
+    /**
+     * lazy create menu dialog
+     */
+    _getMenuDialog: function () {
+      if (!this._oMenuDialog) {
+        this._oMenuDialog = new MenuDialog(this.getView());
+      }
+      return this._oMenuDialog;
     },
 
   });
