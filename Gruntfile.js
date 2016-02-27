@@ -14,6 +14,18 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
+    /* vars */
+
+    pkg: grunt.file.readJSON('package.json'),
+    bower: '',
+    githash: {main: {}},
+    dir: {
+      src: 'src',
+      lib: 'zlib',
+      dest: 'dist',
+      bower_components: 'bower_components',
+    },
+
     /* develop */
 
     connect: {
@@ -56,7 +68,7 @@ module.exports = function (grunt) {
       options: {livereload: true},
       default: {
         files: ['src/**'],
-        tasks: ['jscs:src'],
+        // tasks: ['jshint'],
       },
     },
 
@@ -83,6 +95,24 @@ module.exports = function (grunt) {
           config: 'sassconfig-cm.rb',
           watch: true,
         },
+      },
+    },
+
+    concurrent: {
+      run: [
+        'openui5_connect:src',
+        'watch',
+        'compass:watchsrc',
+        'compass:watchsrc-cm',
+      ],
+    },
+
+    jscs: {
+      src: '<%= dir.src %>',
+      options: {
+        config: '.jscsrc',
+        verbose: true,
+        fix: false, // Autofix code style violations when possible.
       },
     },
 
@@ -246,27 +276,6 @@ module.exports = function (grunt) {
       },
     },
 
-    /* test */
-
-    jscs: {
-      src: '<%= dir.src %>',
-      options: {
-        config: '.jscsrc',
-        verbose: true,
-        fix: false, // Autofix code style violations when possible.
-      },
-    },
-
-    qunit: { // make sure `grunt serve` is running
-      all: {
-        options: {
-          urls: [
-            'http://localhost:8080/test/unit/unitTests.qunit.html',
-          ],
-        },
-      },
-    },
-
     /* deploy */
 
     'gh-pages': {
@@ -276,30 +285,6 @@ module.exports = function (grunt) {
                  'Auto generated commit',
       },
       src: '**/*',
-    },
-
-    /* base */
-
-    pkg: grunt.file.readJSON('package.json'),
-    bower: '',
-    githash: {main: {}},
-    dir: {
-      src: 'src',
-      lib: 'zlib',
-      dest: 'dist',
-      bower_components: 'bower_components',
-    },
-
-    concurrent: {
-      options: {
-        logConcurrentOutput: true,
-      },
-      run: [
-        'openui5_connect:src',
-        'watch',
-        'compass:watchsrc',    // can be rewritted to watch task without
-        'compass:watchsrc-cm', //   using `watch: true`
-      ],
     },
 
   });
@@ -328,8 +313,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('buildprepare', [
     'jscs',                            // js linter checks
-    // 'html/xmlcheck',                   // xml/html syntax check
-    // 'json',                            // json syntax check
     'clean:dest',                      // clean destination folder
     'compass:compilesrc',              // generate css files
     'compass:compilesrc-cm',
@@ -367,14 +350,6 @@ module.exports = function (grunt) {
     'openui5_preload',                  // make component/library preload
 
     'gh-pages',                         // publish to github
-  ]);
-
-  /* test */
-
-  grunt.registerTask('test', [
-    'jscs',                             // js linter checks
-    'qunit:all',                        // unit tests, assuming
-                                        //   `grunt serve` is running
   ]);
 
 };
