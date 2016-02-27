@@ -14,10 +14,9 @@
       enableScrolling="true"
   >
     <headerContent>
-      <Link
-        text="Flocking JS"
-        press="handleLinkPress"
-        href="http://flockingjs.org/"
+      <Button
+          icon="sap-icon://sys-help"
+          press="onAboutPress"
       />
     </headerContent>
 

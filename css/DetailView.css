@@ -17,3 +17,8 @@
   flex-shrink: 0;
   flex-grow: 0;
 }
+
+/* line 16, ../stylesheets/DetailView.sass */
+.fpBlock {
+  display: block;
+}

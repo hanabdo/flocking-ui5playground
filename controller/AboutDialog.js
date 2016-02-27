@@ -15,9 +15,9 @@ sap.ui.define([
   'use strict';
 
   /**
-   * @class fplay.controller.MenuDialog
+   * @class fplay.controller.AboutDialog
    */
-  var MenuDialog = UI5Object.extend('fplay.controller.MenuDialog', /** @lends sap.ui.base.UI5Object.prototype */ {
+  var AboutDialog = UI5Object.extend('fplay.controller.AboutDialog', /** @lends sap.ui.base.UI5Object.prototype */ {
     _parentView: null,
 
     constructor: function (oView) {
@@ -32,7 +32,7 @@ sap.ui.define([
     _getDialog: function () {
       // create dialog lazily
       if (!this._oDialog) {
-        this._oDialog = sap.ui.xmlfragment('fplay.view.menuDialog', this);
+        this._oDialog = sap.ui.xmlfragment('fplay.view.aboutDialog', this);
       }
       return this._oDialog;
     },
@@ -57,5 +57,5 @@ sap.ui.define([
 
   });
 
-  return MenuDialog;
+  return AboutDialog;
 });
