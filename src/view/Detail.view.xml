@@ -47,6 +47,8 @@
             path: 'examples>code',
             formatter: '.formatLoadedExample'
           }"
+          foldGutter="true"
+          lineNumbers="true"
       />
     </content>
   </Page>
