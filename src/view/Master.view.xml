@@ -10,6 +10,13 @@
   <Page
       title="{i18n>examplesPageTitle}"
   >
+    <headerContent>
+      <Button
+        icon="sap-icon://menu2"
+        press="onMenuPress"
+      />
+    </headerContent>
+
     <subHeader>
       <Toolbar
           class="DetailView__Toolbar"
