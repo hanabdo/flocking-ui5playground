@@ -274,9 +274,37 @@ module.exports = function (grunt) {
           stdout: false,
         },
       },
+      changelog: {
+        options: {
+          stdinRawMode: true,
+        },
+        command: 'subl -w CHANGELOG.md',
+      },
+    },
+
+    qunit: { // make sure `grunt serve` is running
+      all: {
+        options: {
+          urls: [
+            'http://localhost:8080/test/unit/unitTests.qunit.html',
+          ],
+        },
+      },
     },
 
     /* deploy */
+
+    conventionalChangelog: {
+      options: {
+        changelogOpts: {
+          preset: 'angular',
+          releaseCount: 0,
+        },
+      },
+      release: {
+        src: 'CHANGELOG.md',
+      },
+    },
 
     'gh-pages': {
       options: {
