@@ -389,4 +389,10 @@ module.exports = function (grunt) {
     'gh-pages',                         // publish to github
   ]);
 
+  /* test */
+
+  grunt.registerTask('test', [
+    'jscs',                             // js linter checks
+  ]);
+
 };
