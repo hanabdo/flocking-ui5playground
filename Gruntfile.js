@@ -26,12 +26,16 @@ module.exports = function (grunt) {
       bower_components: 'bower_components',
     },
 
-    /* develop */
+    /* local server */
 
     connect: {
       options: {
-        port: 8080,
-        hostname: '*',
+        open: true,
+        port: true,
+        hostname: '*', /* make the server accessible from any local IPv4
+                        * address like '127.0.0.1' and the IP assigned to
+                        * an ethernet or wireless interface
+                        * (like '192.168.0.x' or '10.0.0.x'). */
         keepalive: true,
       },
       src: {},
@@ -68,9 +72,11 @@ module.exports = function (grunt) {
       options: {livereload: true},
       default: {
         files: ['src/**'],
-        // tasks: ['jshint'],
+        tasks: ['jscs:src'],
       },
     },
+
+    /* build */
 
     // sass tasks
     compass: {
@@ -99,11 +105,14 @@ module.exports = function (grunt) {
     },
 
     concurrent: {
+      options: {
+        logConcurrentOutput: true,
+      },
       run: [
         'openui5_connect:src',
         'watch',
-        'compass:watchsrc',
-        'compass:watchsrc-cm',
+        'compass:watchsrc',    // can be rewritted to watch task without
+        'compass:watchsrc-cm', //   using `watch: true`
       ],
     },
 
@@ -115,8 +124,6 @@ module.exports = function (grunt) {
         fix: false, // Autofix code style violations when possible.
       },
     },
-
-    /* build */
 
     clean: {
       dest: [
@@ -341,6 +348,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('buildprepare', [
     'jscs',                            // js linter checks
+    // 'html/xmlcheck',                   // xml/html syntax check
+    // 'json',                            // json syntax check
     'clean:dest',                      // clean destination folder
     'compass:compilesrc',              // generate css files
     'compass:compilesrc-cm',
