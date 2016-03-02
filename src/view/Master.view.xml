@@ -26,6 +26,14 @@
             liveChange="onExampleSearch"
             width="100%"
         />
+        <Button
+          icon="sap-icon://navigation-up-arrow"
+          press="onUpPress"
+        />
+        <Button
+          icon="sap-icon://navigation-down-arrow"
+          press="onDownPress"
+        />
       </Toolbar>
     </subHeader>
 

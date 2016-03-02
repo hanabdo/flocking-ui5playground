@@ -75,6 +75,32 @@ sap.ui.define([
      * @param {sap.ui.base.EventProvider} oControlEvent.getSource
      * @param {object} oControlEvent.getParameters
      */
+    onUpPress: function (oControlEvent) {
+      // var oContext = oControlEvent.getParameter('listItem')
+      //                             .getBindingContext('examples');
+      // oContext.getModel().aBindings
+      //     .filter(function (oJSONListBinding) {
+      //       return oJSONListBinding.getPath() === 'code';
+      //     })
+      //     .forEach(function (oBinding) {
+      //       oBinding.setContext(oContext);
+      //     });
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
+    onDownPress: function (oControlEvent) {
+
+    },
+
+    /**
+     * @param {sap.ui.base.Event} oControlEvent
+     * @param {sap.ui.base.EventProvider} oControlEvent.getSource
+     * @param {object} oControlEvent.getParameters
+     */
     onMenuPress: function (oControlEvent) {
       this._getMenuDialog().open();
     },
