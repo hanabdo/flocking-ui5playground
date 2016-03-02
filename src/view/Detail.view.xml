@@ -13,6 +13,13 @@
       navButtonPress="onNavBack"
       enableScrolling="true"
   >
+    <headerContent>
+      <Button
+          icon="sap-icon://sys-help"
+          press="onAboutPress"
+      />
+    </headerContent>
+
     <content>
       <Toolbar>
         <ToggleButton
