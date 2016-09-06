@@ -213,10 +213,10 @@ module.exports = function (grunt) {
         options: {
           replacements: [{
             pattern: /zlib.CodeMirror.native\": \"[^\"]*/ig,
-            replacement: 'zlib.CodeMirror.native": "https://npmcdn.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>/',
+            replacement: 'zlib.CodeMirror.native": "https://unpkg.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>/',
           }, {
             pattern: /zlib.Flocking.native\": \"[^\"]*/ig,
-            replacement: 'zlib.Flocking.native": "https://npmcdn.com/flocking@<%= bower.dependencies.flocking.pkgMeta.version %>/',
+            replacement: 'zlib.Flocking.native": "https://unpkg.com/flocking@<%= bower.dependencies.flocking.pkgMeta.version %>/',
           }],
         },
       },
@@ -247,8 +247,8 @@ module.exports = function (grunt) {
           fields: {
             'sap.ui5': {
               resourceRoots: {
-                'zlib.CodeMirror.native': 'https://npmcdn.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>/',
-                'zlib.Flocking.native': 'https://npmcdn.com/flocking@<%= bower.dependencies.flocking.pkgMeta.version %>/',
+                'zlib.CodeMirror.native': 'https://unpkg.com/codemirror@<%= bower.dependencies.codemirror.pkgMeta.version %>/',
+                'zlib.Flocking.native': 'https://unpkg.com/flocking@<%= bower.dependencies.flocking.pkgMeta.version %>/',
               },
             },
           },
